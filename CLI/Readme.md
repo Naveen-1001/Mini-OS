@@ -7,7 +7,7 @@ First you would need to compile the main file
 gcc main.c
 '''
 
-To immerse into the world of shell, type the following in your linux terminal
+To run the program in interactive mode, type the following
 '''
 ./a.out
 '''
