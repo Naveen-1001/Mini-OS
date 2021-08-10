@@ -13,8 +13,7 @@ long unsigned int LINE_BUFFER_SIZE = 10;
 unsigned int BUFFER_SIZE = 10;
 
 //turns flag to 1(if there are no arguments for exit), and returns next index to be executed
-int exit_program(char **pointer_to_str_arr, int index)
-{
+int exit_program(char **pointer_to_str_arr, int index){
 	if (pointer_to_str_arr[index + 1] != NULL){
 		while (pointer_to_str_arr[++index] != NULL);
 		printf("exit statement doesnt have parameters\n");
@@ -28,8 +27,7 @@ int exit_program(char **pointer_to_str_arr, int index)
 }
 
 // Executes 'cd' command and then returns next index to be checked
-int cd(char **pointer_to_str_arr, int i)
-{
+int cd(char **pointer_to_str_arr, int i){
 	// it has to wait for all the child process to finish, as they would have changes to the directory structure
 	int status = 0, wpid = 0;
 	while ((wpid = wait(&status)) > 0)
@@ -65,13 +63,13 @@ char **parse(char *line){
 	unsigned int arr_size = BUFFER_SIZE, curr_arr_size = 0, next_index_of_line = 0;
 	char **rv = (char **)malloc(arr_size * (sizeof(char *)));
 
-	if (!rv) printf("\nDynammic allocation failed");
+	if (!rv) printf("\nDynamic allocation failed");
 	while (line[next_index_of_line] != '\n'){
 		if (curr_arr_size == (arr_size - 1)){
 			arr_size += BUFFER_SIZE;
 			rv = (char **)realloc(rv, arr_size * (sizeof(char *)));
 			if (!rv){
-				printf("\nDynammic allocation failed");
+				printf("\nDynamic allocation failed");
 			}
 		}
 
@@ -127,15 +125,15 @@ void execute(char **pointer_to_str_arr){
 			i = cd(pointer_to_str_arr, i);
 		}
 		else if (pointer_to_str_arr[i][0] != '\0'){
-      	if(batch_file==1){
-        int j=i;
-        printf(">>");
-        while(pointer_to_str_arr[j] != NULL){
-          printf("%s ",pointer_to_str_arr[j]);
-          j++;
-        }
-        printf("\n");
-        }	
+			if(batch_file==1){
+				int j=i;
+				printf(">>");
+				while(pointer_to_str_arr[j] != NULL){
+					printf("%s ",pointer_to_str_arr[j]);
+					j++;
+        		}
+				printf("\n");
+        	}	
 			pid = fork();
 			if (pid < 0){
 				printf("\nError during fork");
@@ -201,7 +199,7 @@ int main(int argc, char **argv){
 			freopen(argv[1], "r", stdin);
 			batch_file = 1;
 	  }
-}
+	}
 	printf("Entering Shell !!!\n\n");
 	loop();
 	printf("\nTerminating...\n");
